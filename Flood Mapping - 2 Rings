@@ -1,0 +1,25 @@
+function (pixelCount) {
+  var map = [];
+  var radius = 13; // 13 feet
+  var height = 5; // 5 feet
+  
+  // Lower ring (10 LEDs, 2 per hub)
+  for (var i = 0; i < 10; i++) {
+    var angle = (i / 10) * Math.PI * 2;
+    var x = Math.cos(angle) * radius;
+    var y = Math.sin(angle) * radius;
+    map.push([x, y, 0]);
+    map.push([x, y, 0]); // Adding the second LED for the same hub
+  }
+  
+  // Upper ring (20 LEDs, 4 per hub)
+  for (var i = 0; i < 20; i++) {
+    var angle = (i / 20) * Math.PI * 2;
+    var x = Math.cos(angle) * radius;
+    var y = Math.sin(angle) * radius;
+    map.push([x, y, height]);
+    map.push([x, y, height]); // Adding the second LED for the same hub
+  }
+  
+  return map;
+}
