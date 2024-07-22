@@ -1,0 +1,32 @@
+function (pixelCount) {
+  var map = [];
+  var radius = 13; // 13 feet
+  var height = 5; // 5 feet
+  
+  // Ring 1 (10 LEDs at the bottom)
+  for (var i = 0; i < 10; i++) {
+    var angle = (i / 10) * Math.PI * 2;
+    var x = Math.cos(angle) * radius;
+    var y = Math.sin(angle) * radius;
+    map.push([x, y, 0]);
+  }
+  
+  // Rings 2 and 3 (Overlapping 10 LEDs each above)
+  for (var i = 0; i < 10; i++) {
+    var angle = (i / 10) * Math.PI * 2;
+    var x = Math.cos(angle) * radius;
+    var y = Math.sin(angle) * radius;
+    var z = height;
+
+    // Add Ring 2 pixels
+    map.push([x, y, z]);
+
+    // Add Ring 3 pixels, slightly shifted to overlap alternately
+    var angleShifted = ((i + 0.5) / 10) * Math.PI * 2;
+    var xShifted = Math.cos(angleShifted) * radius;
+    var yShifted = Math.sin(angleShifted) * radius;
+    map.push([xShifted, yShifted, z]);
+  }
+  
+  return map;
+}
